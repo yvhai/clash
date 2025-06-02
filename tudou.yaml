@@ -1,0 +1,494 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
+log-level: info
+external-controller: :9090
+
+proxies:
+  - name: idx-TW-Google_Cloud
+    server: www.visa.com.tw 
+    port: 443 
+    type: vmess 
+    uuid: d3cae5e3-a38d-4f21-8a62-2ef8a2d4b52f
+    alterId: 0
+    cipher: auto 
+    tls: true 
+    servername: peer-graphs-tie-jackson.trycloudflare.com 
+    network: ws 
+    ws-opts: {path: "/vmess-argo?ed=2560", headers: {Host: peer-graphs-tie-jackson.trycloudflare.com}}
+    
+  - name: hui
+    port: 32247
+    server: a.yunxp.ip-ddns.com
+    type: hysteria2
+    udp: true
+    password: yvhai001.xfb800121
+    skip-cert-verify: true
+
+proxy-groups:
+
+  - name: 节点选择
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/global.svg
+    proxies:
+      - 自动选择
+      - hui
+      - CFWorker
+      - googleWorker
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇸🇬 狮城
+      - 🇯🇵 日本
+      - 🇺🇲 美国
+      - 🇰🇷 韩国
+      - 手动切换
+      - DIRECT
+      - REJECT
+
+  - name: 手动切换
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/emoji-62ce7f844cb4352b14221552.svg
+    use:
+      - SYQ
+  
+
+  - name: 自动选择
+    type: url-test
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/speedtest.svg
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    use:
+      - SYQ
+
+  - name: CFWorker
+    type: url-test
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/cloudflare.svg
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    use:
+      - CF
+
+  - name: googleWorker
+    type: url-test
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/google.svg
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    use:
+      - google
+
+  - name: Microsoft
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/microsoft.svg
+    proxies:
+      - DIRECT
+      - REJECT
+      - 节点选择
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇸🇬 狮城
+      - 🇯🇵 日本
+      - 🇺🇲 美国
+      - 🇰🇷 韩国
+      - 手动切换
+      
+  - name: Github
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/github.svg
+    proxies:
+      - 节点选择
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇸🇬 狮城
+      - 🇯🇵 日本
+      - 🇺🇲 美国
+      - 🇰🇷 韩国
+      - 手动切换
+      - DIRECT
+      - REJECT
+
+  - name: Apple
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/apple.svg
+    proxies:
+      - DIRECT
+      - REJECT
+      - 节点选择
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇸🇬 狮城
+      - 🇯🇵 日本
+      - 🇺🇲 美国
+      - 🇰🇷 韩国
+      - 手动切换
+
+  - name: Google
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/google.svg
+    proxies:
+      - 节点选择
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇸🇬 狮城
+      - 🇯🇵 日本
+      - 🇺🇲 美国
+      - 🇰🇷 韩国
+      - 手动切换
+      - DIRECT
+      - REJECT
+
+  - name: YouTube
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/social-youtube.svg
+    proxies:
+      - 节点选择
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇸🇬 狮城
+      - 🇯🇵 日本
+      - 🇺🇲 美国
+      - 🇰🇷 韩国
+      - 手动切换
+      - DIRECT
+      - REJECT
+
+  - name: TikTok
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/tiktok.svg
+    proxies:
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇸🇬 狮城
+      - 🇯🇵 日本
+      - 🇺🇲 美国
+      - 🇰🇷 韩国
+      - 手动切换
+      - DIRECT
+      - REJECT
+
+  - name: Netflix
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/netflix.svg
+    proxies:
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇸🇬 狮城
+      - 🇯🇵 日本
+      - 🇺🇲 美国
+      - 🇰🇷 韩国
+      - 手动切换
+      - DIRECT
+      - REJECT
+
+
+  - name: AI
+    type: url-test
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/ChatGPT.svg
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (ChatGPT|OpenAi|GPT)
+    
+    use:
+      - SYQ
+      
+
+  - name: 哔哩哔哩
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/bilibili.svg
+    proxies:
+      - DIRECT
+      - REJECT
+      - 🇹🇼 台湾
+      - 🇭🇰 香港
+
+  - name: 漏网之鱼
+    type: select
+    icon: https://cdn.jsdelivr.net/gh/fallssyj/Clash/assets/icons/emoji-62ce7fe24cb4352b142217ef.svg
+    proxies:
+      - 节点选择
+      - 自动选择
+      - DIRECT
+      - REJECT
+
+
+  - name: 🇭🇰 香港
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (港|HK|hk|Hong Kong|HongKong|hongkong)
+    use:
+      - SYQ
+
+  - name: 🇯🇵 日本
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan)
+    use:
+      - SYQ
+
+  - name: 🇺🇲 美国
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States)
+    use:
+      - SYQ
+
+  - name: 🇹🇼 台湾
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (台|新北|彰化|TW|Taiwan)
+    use:
+      - SYQ
+
+  - name: 🇸🇬 狮城
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (新加坡|坡|狮城|SG|Singapore)
+    use:
+      - SYQ
+
+  - name: 🇰🇷 韩国
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (KR|Korea|KOR|首尔|韩|韓)
+    use:
+      - SYQ
+
+proxy-providers:
+  SYQ:
+    type: http
+    url: https://sub.opsyj.cn/sub?url=https://subs.syq.tw/api/v1/client/subscribe?token=ea4e2884000da1adc505baab5cfe9207
+    interval: 23200
+    path: ./proxy-providers/SYQ.yaml
+    header:
+      User-Agent:
+      - "clash-verge/v2.2.3"
+    health-check:
+      enable: true
+      interval: 3600
+      url: http://www.gstatic.com/generate_204
+
+  CF:
+    type: http
+    url: https://b.yunxp.ip-ddns.com/17d5404b-a08e-49a3-9569-59a0f8db3f9d?clash
+    interval: 23200
+    path: ./proxy-providers/CF.yaml
+    health-check:
+      enable: true
+      interval: 3600
+      url: http://www.gstatic.com/generate_204
+
+  google:
+    type: http
+    url: https://api.dler.io/sub?target=clash&url=vmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLXRscy1hcmdvLWZpcmViYXNlLXl2aGFpb3MtMTc0Nzk4NzY3ODE2MS00NDMiLCAiYWRkIjogIjEwNC4xNi4wLjAiLCAicG9ydCI6ICI0NDMiLCAiaWQiOiAiMTVkODUwMGItMzU0NC00YTI1LWEwZmMtNWFlMWEzMGNmZGIyIiwgImFpZCI6ICIwIiwgInNjeSI6ICJhdXRvIiwgIm5ldCI6ICJ3cyIsICJ0eXBlIjogIm5vbmUiLCAiaG9zdCI6ICJndnBzLnl1bnhwLmRwZG5zLm9yZyIsICJwYXRoIjogIi8xNWQ4NTAwYi0zNTQ0LTRhMjUtYTBmYy01YWUxYTMwY2ZkYjItdm0%2FZWQ9MjA0OCIsICJ0bHMiOiAidGxzIiwgInNuaSI6ICJndnBzLnl1bnhwLmRwZG5zLm9yZyIsICJhbHBuIjogIiIsICJmcCI6ICIifQo%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLXRscy1hcmdvLWZpcmViYXNlLXl2aGFpb3MtMTc0Nzk4NzY3ODE2MS04NDQzIiwgImFkZCI6ICIxMDQuMTcuMC4wIiwgInBvcnQiOiAiODQ0MyIsICJpZCI6ICIxNWQ4NTAwYi0zNTQ0LTRhMjUtYTBmYy01YWUxYTMwY2ZkYjIiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogImd2cHMueXVueHAuZHBkbnMub3JnIiwgInBhdGgiOiAiLzE1ZDg1MDBiLTM1NDQtNGEyNS1hMGZjLTVhZTFhMzBjZmRiMi12bT9lZD0yMDQ4IiwgInRscyI6ICJ0bHMiLCAic25pIjogImd2cHMueXVueHAuZHBkbnMub3JnIiwgImFscG4iOiAiIiwgImZwIjogIiJ9Cg%3D%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLXRscy1hcmdvLWZpcmViYXNlLXl2aGFpb3MtMTc0Nzk4NzY3ODE2MS0yMDUzIiwgImFkZCI6ICIxMDQuMTguMC4wIiwgInBvcnQiOiAiMjA1MyIsICJpZCI6ICIxNWQ4NTAwYi0zNTQ0LTRhMjUtYTBmYy01YWUxYTMwY2ZkYjIiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogImd2cHMueXVueHAuZHBkbnMub3JnIiwgInBhdGgiOiAiLzE1ZDg1MDBiLTM1NDQtNGEyNS1hMGZjLTVhZTFhMzBjZmRiMi12bT9lZD0yMDQ4IiwgInRscyI6ICJ0bHMiLCAic25pIjogImd2cHMueXVueHAuZHBkbnMub3JnIiwgImFscG4iOiAiIiwgImZwIjogIiJ9Cg%3D%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLXRscy1hcmdvLWZpcmViYXNlLXl2aGFpb3MtMTc0Nzk4NzY3ODE2MS0yMDgzIiwgImFkZCI6ICIxMDQuMTkuMC4wIiwgInBvcnQiOiAiMjA4MyIsICJpZCI6ICIxNWQ4NTAwYi0zNTQ0LTRhMjUtYTBmYy01YWUxYTMwY2ZkYjIiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogImd2cHMueXVueHAuZHBkbnMub3JnIiwgInBhdGgiOiAiLzE1ZDg1MDBiLTM1NDQtNGEyNS1hMGZjLTVhZTFhMzBjZmRiMi12bT9lZD0yMDQ4IiwgInRscyI6ICJ0bHMiLCAic25pIjogImd2cHMueXVueHAuZHBkbnMub3JnIiwgImFscG4iOiAiIiwgImZwIjogIiJ9Cg%3D%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLXRscy1hcmdvLWZpcmViYXNlLXl2aGFpb3MtMTc0Nzk4NzY3ODE2MS0yMDg3IiwgImFkZCI6ICIxMDQuMjAuMC4wIiwgInBvcnQiOiAiMjA4NyIsICJpZCI6ICIxNWQ4NTAwYi0zNTQ0LTRhMjUtYTBmYy01YWUxYTMwY2ZkYjIiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogImd2cHMueXVueHAuZHBkbnMub3JnIiwgInBhdGgiOiAiLzE1ZDg1MDBiLTM1NDQtNGEyNS1hMGZjLTVhZTFhMzBjZmRiMi12bT9lZD0yMDQ4IiwgInRscyI6ICJ0bHMiLCAic25pIjogImd2cHMueXVueHAuZHBkbnMub3JnIiwgImFscG4iOiAiIiwgImZwIjogIiJ9Cg%3D%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLXRscy1hcmdvLWZpcmViYXNlLXl2aGFpb3MtMTc0Nzk4NzY3ODE2MS0yMDk2IiwgImFkZCI6ICJbMjYwNjo0NzAwOjpdIiwgInBvcnQiOiAiMjA5NiIsICJpZCI6ICIxNWQ4NTAwYi0zNTQ0LTRhMjUtYTBmYy01YWUxYTMwY2ZkYjIiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogImd2cHMueXVueHAuZHBkbnMub3JnIiwgInBhdGgiOiAiLzE1ZDg1MDBiLTM1NDQtNGEyNS1hMGZjLTVhZTFhMzBjZmRiMi12bT9lZD0yMDQ4IiwgInRscyI6ICJ0bHMiLCAic25pIjogImd2cHMueXVueHAuZHBkbnMub3JnIiwgImFscG4iOiAiIiwgImZwIjogIiJ9Cg%3D%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLWFyZ28tZmlyZWJhc2UteXZoYWlvcy0xNzQ3OTg3Njc4MTYxLTgwIiwgImFkZCI6ICIxMDQuMjEuMC4wIiwgInBvcnQiOiAiODAiLCAiaWQiOiAiMTVkODUwMGItMzU0NC00YTI1LWEwZmMtNWFlMWEzMGNmZGIyIiwgImFpZCI6ICIwIiwgInNjeSI6ICJhdXRvIiwgIm5ldCI6ICJ3cyIsICJ0eXBlIjogIm5vbmUiLCAiaG9zdCI6ICJndnBzLnl1bnhwLmRwZG5zLm9yZyIsICJwYXRoIjogIi8xNWQ4NTAwYi0zNTQ0LTRhMjUtYTBmYy01YWUxYTMwY2ZkYjItdm0%2FZWQ9MjA0OCIsICJ0bHMiOiAiIn0K%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLWFyZ28tZmlyZWJhc2UteXZoYWlvcy0xNzQ3OTg3Njc4MTYxLTgwODAiLCAiYWRkIjogIjEwNC4yMi4wLjAiLCAicG9ydCI6ICI4MDgwIiwgImlkIjogIjE1ZDg1MDBiLTM1NDQtNGEyNS1hMGZjLTVhZTFhMzBjZmRiMiIsICJhaWQiOiAiMCIsICJzY3kiOiAiYXV0byIsICJuZXQiOiAid3MiLCAidHlwZSI6ICJub25lIiwgImhvc3QiOiAiZ3Zwcy55dW54cC5kcGRucy5vcmciLCAicGF0aCI6ICIvMTVkODUwMGItMzU0NC00YTI1LWEwZmMtNWFlMWEzMGNmZGIyLXZtP2VkPTIwNDgiLCAidGxzIjogIiJ9Cg%3D%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLWFyZ28tZmlyZWJhc2UteXZoYWlvcy0xNzQ3OTg3Njc4MTYxLTg4ODAiLCAiYWRkIjogIjEwNC4yNC4wLjAiLCAicG9ydCI6ICI4ODgwIiwgImlkIjogIjE1ZDg1MDBiLTM1NDQtNGEyNS1hMGZjLTVhZTFhMzBjZmRiMiIsICJhaWQiOiAiMCIsICJzY3kiOiAiYXV0byIsICJuZXQiOiAid3MiLCAidHlwZSI6ICJub25lIiwgImhvc3QiOiAiZ3Zwcy55dW54cC5kcGRucy5vcmciLCAicGF0aCI6ICIvMTVkODUwMGItMzU0NC00YTI1LWEwZmMtNWFlMWEzMGNmZGIyLXZtP2VkPTIwNDgiLCAidGxzIjogIiJ9Cg%3D%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLWFyZ28tZmlyZWJhc2UteXZoYWlvcy0xNzQ3OTg3Njc4MTYxLTIwNTIiLCAiYWRkIjogIjEwNC4yNS4wLjAiLCAicG9ydCI6ICIyMDUyIiwgImlkIjogIjE1ZDg1MDBiLTM1NDQtNGEyNS1hMGZjLTVhZTFhMzBjZmRiMiIsICJhaWQiOiAiMCIsICJzY3kiOiAiYXV0byIsICJuZXQiOiAid3MiLCAidHlwZSI6ICJub25lIiwgImhvc3QiOiAiZ3Zwcy55dW54cC5kcGRucy5vcmciLCAicGF0aCI6ICIvMTVkODUwMGItMzU0NC00YTI1LWEwZmMtNWFlMWEzMGNmZGIyLXZtP2VkPTIwNDgiLCAidGxzIjogIiJ9Cg%3D%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLWFyZ28tZmlyZWJhc2UteXZoYWlvcy0xNzQ3OTg3Njc4MTYxLTIwODIiLCAiYWRkIjogIjEwNC4yNi4wLjAiLCAicG9ydCI6ICIyMDgyIiwgImlkIjogIjE1ZDg1MDBiLTM1NDQtNGEyNS1hMGZjLTVhZTFhMzBjZmRiMiIsICJhaWQiOiAiMCIsICJzY3kiOiAiYXV0byIsICJuZXQiOiAid3MiLCAidHlwZSI6ICJub25lIiwgImhvc3QiOiAiZ3Zwcy55dW54cC5kcGRucy5vcmciLCAicGF0aCI6ICIvMTVkODUwMGItMzU0NC00YTI1LWEwZmMtNWFlMWEzMGNmZGIyLXZtP2VkPTIwNDgiLCAidGxzIjogIiJ9Cg%3D%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLWFyZ28tZmlyZWJhc2UteXZoYWlvcy0xNzQ3OTg3Njc4MTYxLTIwODYiLCAiYWRkIjogIjEwNC4yNy4wLjAiLCAicG9ydCI6ICIyMDg2IiwgImlkIjogIjE1ZDg1MDBiLTM1NDQtNGEyNS1hMGZjLTVhZTFhMzBjZmRiMiIsICJhaWQiOiAiMCIsICJzY3kiOiAiYXV0byIsICJuZXQiOiAid3MiLCAidHlwZSI6ICJub25lIiwgImhvc3QiOiAiZ3Zwcy55dW54cC5kcGRucy5vcmciLCAicGF0aCI6ICIvMTVkODUwMGItMzU0NC00YTI1LWEwZmMtNWFlMWEzMGNmZGIyLXZtP2VkPTIwNDgiLCAidGxzIjogIiJ9Cg%3D%3D%7Cvmess%3A%2F%2FeyAidiI6ICIyIiwgInBzIjogInZtZXNzLXdzLWFyZ28tZmlyZWJhc2UteXZoYWlvcy0xNzQ3OTg3Njc4MTYxLTIwOTUiLCAiYWRkIjogIlsyNDAwOmNiMDA6MjA0OTo6XSIsICJwb3J0IjogIjIwOTUiLCAiaWQiOiAiMTVkODUwMGItMzU0NC00YTI1LWEwZmMtNWFlMWEzMGNmZGIyIiwgImFpZCI6ICIwIiwgInNjeSI6ICJhdXRvIiwgIm5ldCI6ICJ3cyIsICJ0eXBlIjogIm5vbmUiLCAiaG9zdCI6ICJndnBzLnl1bnhwLmRwZG5zLm9yZyIsICJwYXRoIjogIi8xNWQ4NTAwYi0zNTQ0LTRhMjUtYTBmYy01YWUxYTMwY2ZkYjItdm0%2FZWQ9MjA0OCIsICJ0bHMiOiAiIn0K%7C&insert=false
+    interval: 23200
+    path: ./proxy-providers/google.yaml
+    health-check:
+      enable: true
+      interval: 3600
+      url: http://www.gstatic.com/generate_204
+
+
+rule-providers:
+
+  ProxyGFWlist:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/ProxyGFWlist.yaml
+    path: ./ruleset/ProxyGFWlist.yaml
+    interval: 3600
+
+  ad:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/BanAD.yaml
+    path: ./ruleset/BanAD.yaml
+    interval: 3600
+
+  ban-cdr:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/BanCDR.yaml
+    path: ./ruleset/BanCDR.yaml
+    interval: 3600
+
+  my-direct:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/Direct.yaml
+    path: ./ruleset/direct.yaml
+    interval: 3600
+
+  ai:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/AI.yaml
+    path: ./ruleset/ai.yaml
+    interval: 3600
+
+  steam:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/Steam.yaml
+    path: ./ruleset/steam.yaml
+    interval: 3600
+
+  Bilibili:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/Bilibili.yaml
+    path: ./ruleset/Bilibili.yaml
+    interval: 3600
+
+  BilibiliHMT:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/BilibiliHMT.yaml
+    path: ./ruleset/BilibiliHMT.yaml
+    interval: 3600
+
+  TikTok:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/TikTok.yaml
+    path: ./ruleset/TikTok.yaml
+    interval: 3600
+
+  Netflix:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/Netflix.yaml
+    path: ./ruleset/Netflix.yaml
+    interval: 3600
+
+  NetflixIP:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/NetflixIP.yaml
+    path: ./ruleset/NetflixIP.yaml
+    interval: 3600
+  
+  Apple:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/Apple.yaml
+    path: ./ruleset/Apple.yaml
+    interval: 3600
+
+  Microsoft:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/Microsoft.yaml
+    path: ./ruleset/Microsoft.yaml
+    interval: 3600
+
+  Github:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/Github.yaml
+    path: ./ruleset/Github.yaml
+    interval: 3600
+
+  Google:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/Google.yaml
+    path: ./ruleset/Google.yaml
+    interval: 3600
+  
+  GoogleCN:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/GoogleCN.yaml
+    path: ./ruleset/GoogleCN.yaml
+    interval: 3600
+
+  GoogleCNProxyIP:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/GoogleCNProxyIP.yaml
+    path: ./ruleset/GoogleCNProxyIP.yaml
+    interval: 3600
+  
+  GoogleEarth:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/GoogleEarth.yaml
+    path: ./ruleset/GoogleEarth.yaml
+    interval: 3600
+
+  GoogleFCM:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/GoogleFCM.yaml
+    path: ./ruleset/GoogleFCM.yaml
+    interval: 3600
+
+  YouTube:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/YouTube.yaml
+    path: ./ruleset/YouTube.yaml
+    interval: 3600
+
+  YouTubeMusic:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/fallssyj/Clash/Providers/YouTubeMusic.yaml
+    path: ./ruleset/YouTubeMusic.yaml
+    interval: 3600
+
+rules:
+
+  - DOMAIN-KEYWORD,internetdownloadmanager,DIRECT 
+  - DOMAIN-KEYWORD,5avarodriguez,DIRECT
+  - DOMAIN-KEYWORD,surrit,DIRECT
+  - DOMAIN-KEYWORD,cloudflare,DIRECT
+
+  - RULE-SET,ai,AI
+  - RULE-SET,Apple,Apple
+  - RULE-SET,TikTok,TikTok
+  - RULE-SET,Netflix,Netflix
+  - RULE-SET,NetflixIP,Netflix
+
+  - RULE-SET,Google,Google
+  - RULE-SET,GoogleCN,Google
+  - RULE-SET,GoogleCNProxyIP,Google
+  - RULE-SET,GoogleEarth,Google
+  - RULE-SET,GoogleFCM,Google
+
+  - RULE-SET,Github,Github
+
+  - RULE-SET,Microsoft,Microsoft
+
+  - RULE-SET,YouTube,YouTube
+  - RULE-SET,YouTubeMusic,YouTube
+
+
+  - RULE-SET,ProxyGFWlist,节点选择
+
+  - RULE-SET,Bilibili,哔哩哔哩
+  - RULE-SET,BilibiliHMT,哔哩哔哩
+
+  - RULE-SET,my-direct,DIRECT
+  - RULE-SET,steam,DIRECT
+  - RULE-SET,ad,REJECT
+  - RULE-SET,ban-cdr,REJECT
+  - GEOIP,CN,DIRECT
+
+  - MATCH,漏网之鱼
