@@ -17,7 +17,10 @@ jobs:
       with:
         python-version: '3.13'
         cache: 'pip' # caching pip dependencies
-    - run: pip install -r requirements.txt
+    - run: |
+        pip install -r requirements.txt
+        permissions:
+          contents: write
 
     - name: Set-Timezone
       run: |
@@ -26,10 +29,10 @@ jobs:
         echo "MESSAGE=$timestamp" >> $GITHUB_ENV
         date
     - name: Build
-      run: |
-        python update.py
+      run: |    
         permissions:
           contents: write
+        python update.py
 
     - name: Commit & Push changes
       uses: actions-js/push@master
