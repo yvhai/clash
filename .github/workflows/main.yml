@@ -1,38 +1,47 @@
-name: Build
+name: Auto-Update
 
 on:
   schedule:
-    - cron: "0 20 * * *" 
+    - cron: "0 20 * * *"  # UTC时间每天20:00 (北京时间次日4:00)
   workflow_dispatch:
 
-permissions:  #权限声明必须全局或作业级
-  contents: write  # 推送代码需要写权限
+# 👇 关键权限设置
+permissions:
+  contents: write  # 赋予推送权限
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # 获取完整git历史
+
     - uses: actions/setup-python@v5
       with:
-        python-version: '3.13'
-        cache: 'pip'
+        python-version: '3.12'
 
     - name: Install dependencies
-      run: pip install -r requirements.txt  # 分离权限和安装步骤
+      run: pip install -r requirements.txt
 
-    - name: Set-Timezone
+    - name: Set Timezone
       run: |
         sudo timedatectl set-timezone Asia/Shanghai
-        timestamp="chore: autopublish $(date +'%Y-%m-%d %H:%M:%S')"  
-        echo "MESSAGE=$timestamp" >> $GITHUB_ENV
-        date
+        echo "MESSAGE=chore: autopublish $(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
-    - name: Build
-      run: python my_script.py  
+    - name: Run Update Script
+      run: python my_script.py
 
-    - name: Commit & Push changes
-      uses: actions-js/push@master  # 建议改用更维护的stefanzweifel/git-auto-commit-action
+    # 👇 配置Git身份（推送必需）
+    - name: Setup Git Identity
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+    # 👇 使用GITHUB_TOKEN推送
+    - name: Commit & Push Changes
+      uses: stefanzweifel/git-auto-commit-action@v5
       with:
+        commit_message: ${{ env.MESSAGE }}
+        branch: main
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        message: ${{ env.MESSAGE }}
