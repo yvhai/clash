@@ -1,41 +1,39 @@
 name: Build
 
 on:
-  #push:
-  #  branches: 
-  #    - main
   schedule:
-    - cron: "0 20 * * * "
+    - cron: "0 20 * * *" 
   workflow_dispatch:
+
+permissions:  #权限声明必须全局或作业级
+  contents: write  # 推送代码需要写权限
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+
     - uses: actions/setup-python@v5
       with:
         python-version: '3.13'
-        cache: 'pip' # caching pip dependencies
-    - run: |
-        pip install -r requirements.txt
-        permissions:
-          contents: write
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt  # 分离权限和安装步骤
 
     - name: Set-Timezone
       run: |
         sudo timedatectl set-timezone Asia/Shanghai
-        timestamp="chore: autopublish"$(date +" %Y-%m-%d %H:%M:%S")
+        timestamp="chore: autopublish $(date +'%Y-%m-%d %H:%M:%S')"  # 修正：移除多余引号
         echo "MESSAGE=$timestamp" >> $GITHUB_ENV
         date
+
     - name: Build
-      run: |    
-        permissions:
-          contents: write
-        python update.py
+      run: python update.py  
 
     - name: Commit & Push changes
-      uses: actions-js/push@master
+      uses: actions-js/push@master  # 建议改用更维护的stefanzweifel/git-auto-commit-action
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         message: ${{ env.MESSAGE }}
