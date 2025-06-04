@@ -10,7 +10,7 @@ proxies:
     server: www.visa.com.tw 
     port: 443 
     type: vmess 
-    uuid: d3cae5e3-a38d-4f21-8a62-2ef8a2d4b52f
+    uuid: d3cae5e3-a38d-
     alterId: 0
     cipher: auto 
     tls: true 
@@ -20,10 +20,10 @@ proxies:
     
   - name: hui
     port: 32247
-    server: a.yunxp.ip-ddns.com
+    server: a.
     type: hysteria2
     udp: true
-    password: yvhai001.xfb800121
+    password: y
     skip-cert-verify: true
 
 proxy-groups:
