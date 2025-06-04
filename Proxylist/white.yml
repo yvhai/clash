@@ -1,10 +1,7 @@
 payload:
   # 内容：white
   # 数量：24条
-  - DOMAIN-KEYWORD,missav
-  - DOMAIN-KEYWORD,123av
   - DOMAIN-KEYWORD,5avarodriguez
-  - DOMAIN-SUFFIX,missav.com
   - DOMAIN-SUFFIX,5isabellaclark.site
   - DOMAIN-SUFFIX,app-measurement.net
   - DOMAIN-SUFFIX,surrit.com
