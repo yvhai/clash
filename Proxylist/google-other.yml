@@ -6,3 +6,4 @@ payload:
   - DOMAIN-SUFFIX,missav.com
   #- DOMAIN-KEYWORD,anthropic
   - DOMAIN-SUFFIX,cloudworkstations.dev
+  - DOMAIN-SUFFIX,firebaseio.com
