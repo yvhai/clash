@@ -1,2 +1,2 @@
 # clash
-clash规则
+clash
