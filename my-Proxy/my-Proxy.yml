@@ -5,3 +5,15 @@ payload:
   - DOMAIN-SUFFIX,5isabellaclark.site
   - DOMAIN-SUFFIX,app-measurement.net
   - DOMAIN-SUFFIX,5avarodriguez.site
+  # 内容：cloudflare
+  - DOMAIN-KEYWORD,cloudflare
+  - DOMAIN-SUFFIX,adobedtm.com
+  - DOMAIN-SUFFIX,cloudflareinsights.com
+  - DOMAIN-SUFFIX,adobedc.net
+  - DOMAIN-SUFFIX,onetrust.com
+  - DOMAIN-SUFFIX,stripe.com
+  - DOMAIN-SUFFIX,stripe.network
+  - DOMAIN-SUFFIX,adobedc.net
+  - DOMAIN-SUFFIX,cloudflareclient.com
+  - DOMAIN-SUFFIX,cloudflare.com
+  - DOMAIN-SUFFIX,cloudflarestatus.com 
