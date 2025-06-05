@@ -35,7 +35,7 @@ def download_file(url):
 
 def purge_jsdelivr_cache(filename):
     """调用 jsDelivr 清缓存"""
-    purge_url = f'https://purge.jsdelivr.net/gh/fallssyj/Clash/Providers/{filename}'
+    purge_url = f'https://purge.jsdelivr.net/gh/yvhai/Clash/Providers/{filename}'
     try:
         res = requests.get(purge_url)
         if res.status_code == 200:
