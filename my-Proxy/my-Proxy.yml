@@ -1,7 +1,7 @@
 payload:
   # 内容：my-Proxy.
   - DOMAIN-KEYWORD,5avarodriguez
-  - DOMAIN-KEYWORD,surrit
+  - DOMAIN-SUFFIX,surrit.com
   - DOMAIN-SUFFIX,5isabellaclark.site
   - DOMAIN-SUFFIX,app-measurement.net
   - DOMAIN-SUFFIX,5avarodriguez.site
