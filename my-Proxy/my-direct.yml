@@ -1,13 +1,4 @@
 payload:
-  # 内容：cloudflare
-  - DOMAIN-KEYWORD,cloudflare
-  - DOMAIN-SUFFIX,adobedtm.com
-  - DOMAIN-SUFFIX,cloudflareinsights.com
-  - DOMAIN-SUFFIX,adobedc.net
-  - DOMAIN-SUFFIX,onetrust.com
-  - DOMAIN-SUFFIX,stripe.com
-  - DOMAIN-SUFFIX,stripe.network
-  - DOMAIN-SUFFIX,adobedc.net
-  - DOMAIN-SUFFIX,cloudflareclient.com
-  - DOMAIN-SUFFIX,cloudflare.com
-  - DOMAIN-SUFFIX,cloudflarestatus.com
+  # 内容：www.jsdelivr.com
+  - DOMAIN-KEYWORD,jsdelivr
+
