@@ -1,11 +1,6 @@
 payload:
   # 内容：my-Proxy
-  - DOMAIN-KEYWORD,5avarodriguez
-  - DOMAIN-SUFFIX,surrit.com
-  - DOMAIN-SUFFIX,5isabellaclark.site
-  - DOMAIN-SUFFIX,app-measurement.net
-  - DOMAIN-SUFFIX,5avarodriguez.site
-  - DOMAIN-SUFFIX,nineyu.com
+  
   # 内容：cloudflare
   - DOMAIN-KEYWORD,cloudflare
   - DOMAIN-SUFFIX,adobedtm.com
