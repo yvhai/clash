@@ -19,4 +19,4 @@ payload:
   - DOMAIN-SUFFIX,cloudflare.com
   - DOMAIN-SUFFIX,cloudflarestatus.com 
   # 内容：telegram
-  91.108.56.192
+  - IP-CIDR,91.108.56.192/32,no-resolve
