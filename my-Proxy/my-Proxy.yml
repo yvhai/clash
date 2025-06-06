@@ -1,6 +1,8 @@
 payload:
+
   # 内容：my-Proxy
-  
+  - DOMAIN-KEYWORD,missav
+  - DOMAIN-KEYWORD,123av
   # 内容：cloudflare
   - DOMAIN-KEYWORD,cloudflare
   - DOMAIN-SUFFIX,adobedtm.com
