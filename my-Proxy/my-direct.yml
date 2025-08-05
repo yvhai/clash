@@ -1,4 +1,5 @@
 payload:
   # 内容：www.jsdelivr.com
   - DOMAIN-KEYWORD,jsdelivr
+  - DOMAIN-SUFFIX,yunxp.top
 
