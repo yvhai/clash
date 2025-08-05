@@ -1,0 +1,226 @@
+# ========================
+# 订阅分组
+# ========================
+proxy-providers:
+  SYQ:
+    type: file
+    # url: https://subsc.syq.tw/api/v1/ea4e2884000da1adc505baab5cfe920711
+    interval: 3600
+    path: ./proxy-providers/SYQ.yaml
+    health-check:
+      enable: true
+      interval: 180
+      url: http://www.gstatic.com/generate_204
+
+  myserver:
+    type: file
+    interval: 3600
+    path: ./proxy-providers/myserver.yaml
+    health-check:
+      enable: true
+      interval: 180
+      url: http://www.gstatic.com/generate_204
+
+  CF:
+    type: file
+    interval: 3600
+    path: ./proxy-providers/CF.yaml
+    health-check:
+      enable: true
+      interval: 180
+      url: http://www.gstatic.com/generate_204
+
+  google:
+    type: file
+    interval: 3600
+    path: ./proxy-providers/google.yaml
+    health-check:
+      enable: true
+      interval: 180
+      url: http://www.gstatic.com/generate_204
+
+# 节点信息
+proxies:
+  - {name: 🎯 直连, type: direct}
+  - {name: 🚫 拒绝, type: reject}
+
+# 全局配置 
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7894
+allow-lan: true
+bind-address: "*"
+ipv6: false
+unified-delay: true
+tcp-concurrent: true
+log-level: warning
+find-process-mode: strict
+# interface-name: en0
+global-client-fingerprint: random
+keep-alive-idle: 600
+keep-alive-interval: 15
+disable-keep-alive: false
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# 控制面板，external-ui 路径如果出现报错，根据你使用的插件进行调整，比如openclash改为： /etc/openclash/run/ui  ，裸核跑改为/etc/mihomo/run/ui
+# 因容易造成新手面板启动问题，我注释掉了，需要的自行开启
+external-controller: 0.0.0.0:9090
+secret: ""
+external-ui: "ui"
+external-ui-name: zashboard
+external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+
+# 嗅探
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:
+    - "+.v2ex.com"
+  skip-domain:
+    - "Mijia Cloud"
+    - "dlg.io.mi.com"
+    - "+.push.apple.com"
+    - "+.apple.com"
+    - "+.wechat.com"
+    - "+.qpic.cn"
+    - "+.qq.com"
+    - "+.wechatapp.com"
+    - "+.vivox.com"
+
+# 代理模式
+tun:
+  enable: true
+  # system/gvisor/mixed
+  stack: mixed
+  dns-hijack: ["any:53", "tcp://any:53"]
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+
+# DNS模块
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  respect-rules: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - "GEOSITE:private,cn"
+    - "+.services.googleapis.cn"
+    - "+.xn--ngstr-lra8j.com"
+    - "time.*.com"
+    - "+.pool.ntp.org"
+    - "+.ntp.tencent.com"
+    - "+.ntp1.aliyun.com"
+    - "+.ntp.ntsc.ac.cn"
+    - "+.cn.ntp.org.cn"
+    - "+.market.xiaomi.com"
+  default-nameserver:
+    - 223.5.5.5
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query
+  # namesever尽量用运营商提供的DNS
+  nameserver:
+    - 61.128.128.68
+    - 61.128.192.68
+ 
+# GEO文件配置
+geodata-mode: true # GeoIP 使用的文件,可选 true 为.dat/ false 为.mmdb
+geodata-loader: standard # GEO 文件加载模式：standard：标准加载器；memconservative：专为内存受限(小内存)设备优化的加载器(默认值)
+geo-auto-update: true # 自动更新 GEO 文件,可选 true/false
+geo-update-interval: 24 # 更新间隔,单位：小时
+geox-url: # 自定义 GEO 文件下载地址
+  geoip: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
+  geosite: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
+  mmdb: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country.mmdb"
+  asn: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb"
+
+# 锚点
+pr: &pr {type: select, proxies: [节点选择,🇯🇵 自建VPS, 🇺🇲 CF节点, 🇹🇼 谷歌节点, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 狮城, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国, ☑️ 手动切换, 🎯 直连]}
+
+#出站分组
+proxy-groups:
+  - {name: 节点选择, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/global.svg, proxies: [🇯🇵 自建VPS, 🇺🇲 CF节点, 🇹🇼 谷歌节点, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 狮城, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国, ☑️ 手动切换, 🎯 直连]}
+  - {name: ☑️ 手动切换, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/emoji-62ce7f844cb4352b14221552.svg, include-all: true}
+  - {name: custom, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/adjust.svg, !!merge <<: *pr}
+  - {name: Microsoft, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/microsoft.svg, !!merge <<: *pr}
+  - {name: GitHub, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/github.svg, !!merge <<: *pr}
+  - {name: Apple, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/apple.svg, !!merge <<: *pr}
+  - {name: Google, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/google.svg, !!merge <<: *pr}
+  - {name: Telegram, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/netflix.svg, !!merge <<: *pr}
+  - {name: YouTube, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/social-youtube.svg, !!merge <<: *pr}
+  - {name: TikTok, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/tiktok.svg, !!merge <<: *pr}
+  - {name: NETFLIX, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/netflix.svg, !!merge <<: *pr}
+  - {name: 哔哩哔哩, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/bilibili.svg, !!merge <<: *pr}
+  - {name: ChatGPT, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/ChatGPT.svg, include-all: true, filter: "(?i)ChatGPT|OpenAi|GPT", proxies: [🎯 直连]}
+  - {name: AdGuard, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/Adguard-home_A.svg, proxies: [🎯 直连, 🚫 拒绝]}
+  - {name: GoHome, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/home-ios.png, include-all: true, filter: "(?i)yvhai", proxies: [🎯 直连]}
+  - {name: 漏网之鱼, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/emoji-62ce7fe24cb4352b142217ef.svg, !!merge <<: *pr}
+
+#节点分组
+  - {name: 🇯🇵 自建VPS, type: url-test, include-all: true, filter: "(?i)Claw"}
+  - {name: 🇺🇲 CF节点, type: url-test, include-all: true, filter: "(?i)CF"}
+  - {name: 🇹🇼 谷歌节点, type: url-test, include-all: true, filter: "(?i)Gg"}
+  - {name: 🇭🇰 香港, type: url-test, include-all: true, filter: "(?i)港|HK|hk|Hong Kong|HongKong|hongkong"}
+  - {name: 🇯🇵 日本, type: url-test, include-all: true, filter: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan"}
+  - {name: 🇸🇬 狮城, type: url-test, include-all: true, filter: "(?i)新加坡|坡|狮城|SG|Singapore"}
+  - {name: 🇺🇲 美国, type: url-test, include-all: true, filter: "(?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States"} 
+  - {name: 🇹🇼 台湾, type: url-test, include-all: true, filter: "(?i)台|新北|彰化|TW|Taiwan"}
+  - {name: 🇰🇷 韩国, type: url-test, include-all: true, filter: "(?i)KR|Korea|KOR|首尔|韩|韓"}
+
+# 规则匹配
+rules:
+  - IP-CIDR,10.0.0.0/24,GoHome,no-resolve #回家
+  - RULE-SET,my-direct,custom # 自用地址🎯 直连
+  - GEOSITE,private,🎯 直连 # 私有地址🎯 直连
+  - GEOSITE,tailscale,🎯 直连 # 必须🎯 直连，否则tailscale代理打洞
+  - GEOSITE,tracker,🎯 直连 # 必须🎯 直连，否则PT/BT🎯 直连代理下载
+  - GEOSITE,category-pt,🎯 直连 # 必须🎯 直连，否则PT标记盒子
+  - GEOSITE,tmdb,节点选择 # TMDB服务，影视刮削
+  - RULE-SET,my-media,哔哩哔哩
+
+  - GEOSITE,apple-cn,Apple 
+  - GEOSITE,category-ai-!cn,ChatGPT
+  - GEOSITE,github,GitHub
+  - GEOSITE,youtube,YouTube
+  - GEOSITE,google,Google
+  - GEOIP,google,Google,no-resolve  
+  - GEOSITE,tiktok,TikTok
+  - GEOSITE,telegram,Telegram # Telegram服务
+  - GEOIP,telegram,Telegram,no-resolve # Telegram服务IP 
+  - GEOSITE,microsoft,Microsoft
+  - GEOSITE,netflix,NETFLIX
+  - GEOIP,netflix,NETFLIX,no-resolve
+  - GEOSITE,geolocation-!cn,节点选择
+  - GEOSITE,cn,🎯 直连 # 中国域名
+  - GEOIP,cn,🎯 直连,no-resolve # 中国IP
+  - MATCH,漏网之鱼
+
+# 规则集
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  ip_text: &ip_text {type: http, interval: 86400, behavior: ipcidr, format: text}
+  ip_yaml: &ip_yaml {type: http, interval: 86400, behavior: ipcidr, format: yaml}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  domain_text: &domain_text {type: http, interval: 86400, behavior: domain, format: text}
+  domain_yaml: &domain_yaml {type: http, interval: 86400, behavior: domain, format: yaml}
+  class: &class {type: http, interval: 86400, behavior: classical, format: text}
+  class_yaml: &class_yaml {type: http, interval: 86400, behavior: classical, format: yaml}
+
+rule-providers: 
+  my-Proxy: { <<: *domain_yaml, url: "https://cdn.jsdelivr.net/gh/yvhai/Clash//my-Proxy/my-Proxy.yml"}
+  my-direct: { <<: *domain_yaml, url: "https://cdn.jsdelivr.net/gh/yvhai/Clash/my-Proxy/my-direct.yml"}
+  my-media: { <<: *domain_yaml, url: "https://cdn.jsdelivr.net/gh/yvhai/Clash//my-Proxy/my-media.yml"}
