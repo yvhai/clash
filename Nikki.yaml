@@ -4,7 +4,7 @@
 proxy-providers:
   SYQ:
     type: file
-    # url: https://subsc.syq.tw/api/v1/ea4e2884000da1adc505baab5cfe920711
+    # url: https://subsc.syq.tw/api/v1/ea4e2884000da1adc505baab5cfe9207
     interval: 3600
     path: ./proxy-providers/SYQ.yaml
     health-check:
@@ -143,10 +143,10 @@ geodata-loader: standard # GEO 文件加载模式：standard：标准加载器�
 geo-auto-update: true # 自动更新 GEO 文件,可选 true/false
 geo-update-interval: 24 # 更新间隔,单位：小时
 geox-url: # 自定义 GEO 文件下载地址
-  geoip: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
-  geosite: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
-  mmdb: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country.mmdb"
-  asn: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb"
+  geoip: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  asn: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb"
 
 # 锚点
 pr: &pr {type: select, proxies: [节点选择,🇯🇵 自建VPS, 🇺🇲 CF节点, 🇹🇼 谷歌节点, 🇭🇰 香港, 🇹🇼 台湾, 🇸🇬 狮城, 🇯🇵 日本, 🇺🇲 美国, 🇰🇷 韩国, ☑️ 手动切换, 🎯 直连]}
@@ -160,7 +160,7 @@ proxy-groups:
   - {name: GitHub, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/github.svg, !!merge <<: *pr}
   - {name: Apple, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/apple.svg, !!merge <<: *pr}
   - {name: Google, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/google.svg, !!merge <<: *pr}
-  - {name: Telegram, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/netflix.svg, !!merge <<: *pr}
+  - {name: Telegram, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/telegram.svg, !!merge <<: *pr}
   - {name: YouTube, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/social-youtube.svg, !!merge <<: *pr}
   - {name: TikTok, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/tiktok.svg, !!merge <<: *pr}
   - {name: NETFLIX, type: select, icon: https://cdn.jsdelivr.net/gh/yvhai/Clash/icons/netflix.svg, !!merge <<: *pr}
@@ -184,7 +184,8 @@ proxy-groups:
 # 规则匹配
 rules:
   - IP-CIDR,10.0.0.0/24,GoHome,no-resolve #回家
-  - RULE-SET,my-direct,custom # 自用地址🎯 直连
+  - RULE-SET,my-Proxy,custom
+  - RULE-SET,my-direct,🎯 直连 # 自用地址🎯 直连
   - GEOSITE,private,🎯 直连 # 私有地址🎯 直连
   - GEOSITE,tailscale,🎯 直连 # 必须🎯 直连，否则tailscale代理打洞
   - GEOSITE,tracker,🎯 直连 # 必须🎯 直连，否则PT/BT🎯 直连代理下载
