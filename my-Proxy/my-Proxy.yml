@@ -3,17 +3,7 @@ payload:
   # 内容：my-Proxy
   - DOMAIN-KEYWORD,missav
   - DOMAIN-KEYWORD,123av
-  # 内容：cloudflare
-  - DOMAIN-KEYWORD,cloudflare
-  - DOMAIN-SUFFIX,adobedtm.com
-  - DOMAIN-SUFFIX,cloudflareinsights.com
-  - DOMAIN-SUFFIX,adobedc.net
-  - DOMAIN-SUFFIX,onetrust.com
-  - DOMAIN-SUFFIX,stripe.com
-  - DOMAIN-SUFFIX,stripe.network
-  - DOMAIN-SUFFIX,adobedc.net
-  - DOMAIN-SUFFIX,cloudflareclient.com
-  - DOMAIN-SUFFIX,cloudflare.com
-  - DOMAIN-SUFFIX,cloudflarestatus.com 
-  # 内容：telegram
-  - IP-CIDR,91.108.56.192/32,no-resolve
+  payload:
+  # 内容：Google
+  - DOMAIN-SUFFIX,cloudworkstations.dev
+  - DOMAIN-SUFFIX,firebaseio.com
