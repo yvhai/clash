@@ -4,7 +4,7 @@
 proxy-providers:
   SYQ:
     type: file
-    # url: https://subsc.syq.tw/api/v1/ea4e2884000da1adc505baab5cfe9207
+    # url: https://subsc.syq.tw/api/v1/ea4e2884000da1adc505baab5cfe9207112
     interval: 3600
     path: ./proxy-providers/SYQ.yaml
     health-check:
