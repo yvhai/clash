@@ -2,7 +2,6 @@ payload:
   # 内容：my-Proxy.
   - DOMAIN-KEYWORD,5avarodriguez
   - DOMAIN-KEYWORD,missav
-  - DOMAIN-SUFFIX,surrit.com
   - DOMAIN-SUFFIX,fourhoi.com
   - DOMAIN-SUFFIX,5isabellaclark.site
   - DOMAIN-SUFFIX,app-measurement.net
@@ -10,6 +9,5 @@ payload:
   - DOMAIN-SUFFIX,nineyu.com
 
   - IP-CIDR,104.20.20.131/32,no-resolve
-  - IP-CIDR,104.18.49.25/32,no-resolve
   - IP-CIDR,2606:4700:20::ac43:486a/64,no-resolve
   - IP-CIDR,2606:4700:3110::6812:358b/64,no-resolve
