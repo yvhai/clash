@@ -8,3 +8,4 @@ payload:
   - DOMAIN-SUFFIX,nineyu.com
   
   - IP-CIDR,2606:4700:3110::6812:358b/64,no-resolve
+  - IP-CIDR,104.18.49.25/32,no-resolve
