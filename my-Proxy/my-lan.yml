@@ -17,4 +17,4 @@ payload:
   - IP-CIDR,fc00::/7,no-resolve
   - IP-CIDR,fe80::/10,no-resolve
   - IP-CIDR,ff00::/8,no-resolve
-- IP-CIDR,fe41::/10,no-resolve
+  - IP-CIDR,fe41::/10,no-resolve
