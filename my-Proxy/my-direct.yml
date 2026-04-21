@@ -4,3 +4,4 @@ payload:
   - DOMAIN-KEYWORD,jsdelivr
   - DOMAIN-SUFFIX,yunxp.top
   - DOMAIN-KEYWORD,cloudflare
+  - DOMAIN-SUFFIX,gstatic.com
