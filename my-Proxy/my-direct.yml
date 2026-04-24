@@ -2,6 +2,17 @@ payload:
   # 内容：www.jsdelivr.com
   - DOMAIN-KEYWORD,synology
   - DOMAIN-KEYWORD,jsdelivr
-  - DOMAIN-SUFFIX,yunxp.top
+  - DOMAIN-KEYWORD,yunxp
   - DOMAIN-KEYWORD,cloudflare
   - DOMAIN-SUFFIX,gstatic.com
+  #CF优选
+  - DOMAIN-SUFFIX,cf.cloudflare.182682.xyz
+  - DOMAIN-SUFFIX,www.shopify.com
+  - DOMAIN-SUFFIX,staticdelivery.nexusmods.com
+  - DOMAIN-SUFFIX,cloudflare-dl.byoip.top
+  - DOMAIN-SUFFIX,cf.tencentapp.cn
+  - DOMAIN-SUFFIX,cf.877774.xyz
+  - DOMAIN-SUFFIX,saas.sin.fan
+  - DOMAIN-SUFFIX,ys2046.cv
+  - DOMAIN-SUFFIX,china-telecom.cname.cloudflare.468123.xyz
+  - DOMAIN-SUFFIX,mfa.gov.ua
